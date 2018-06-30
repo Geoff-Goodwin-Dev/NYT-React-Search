@@ -13,15 +13,8 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Geoff-Goodwin-Dev/nyt-react-search.git"
-  },
   "author": "Geoff Goodwin",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Geoff-Goodwin-Dev/nyt-react-search/issues"
-  },
   "devDependencies": {
     "concurrently": "^3.5.0",
     "nodemon": "^1.11.0"
@@ -30,6 +23,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "if-env": "^1.0.4",
     "mongoose": "^5.1.7"
   }
 }
