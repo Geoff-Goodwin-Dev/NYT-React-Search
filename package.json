@@ -1,9 +1,6 @@
 {
   "name": "nyt-react-search",
   "version": "1.0.0",
-  "engines": {
-    "node": "9.3.0"
-  },
   "description": "New York Times Article Scraper with Mongo DB and React front-end Application",
   "main": "server.js",
   "scripts": {
