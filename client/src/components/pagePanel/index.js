@@ -1,1 +1,1 @@
-export { default } from "./pagePanel";
+export { default } from "./PagePanel";

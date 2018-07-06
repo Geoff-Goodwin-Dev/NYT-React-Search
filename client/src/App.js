@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import './App.css';
-import HeaderBar from './components/header';
-import PagePanel from './components/pagePanel';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import Nav from "./components/Nav";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <HeaderBar />
-        <PagePanel />
-        <PagePanel />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div>
+      <Nav />
+      <Switch>
+        <Route exact path="/" component={MainPage} />
+      </Switch>
+    </div>
+  </Router>
+);
 
 export default App;
