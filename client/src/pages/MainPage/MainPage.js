@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
@@ -43,13 +43,12 @@ class MainPage extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.topic) {
-      // API.saveArticle({
-      //   title: this.state.title,
-      //   author: this.state.author,
-      //   synopsis: this.state.synopsis
-      // })
-      //   .then(res => this.loadArticles())
-      //   .catch(err => console.log(err));
+      API.runQuery(this.state.topic, this.state.startYear, this.state.endYear)
+        .then(res => {
+          console.log(res.data.response.docs);
+          this.setState({ articles: res.data.response.docs })
+        });
+      this.setState({ topic: "", startYear: "", endYear: "" });
       console.log("form submitted");
     }
   };
@@ -97,7 +96,25 @@ class MainPage extends Component {
             <PagePanel
               sectionTitle="Results"
             >
-              <p>Testing</p>
+              {this.state.articles.length ? (
+                <List>
+                  {this.state.articles.map((article) => (
+                    <ListItem key={article.web_url}>
+                      <strong>
+                        <a href={article.web_url} target="_blank">
+                          {article.headline.main}
+                        </a>
+                      </strong>
+                      <p>
+                        Published: {article.pub_date}
+                      </p>
+                      {/*<SaveBtn onClick={() => this.handleSaveBtn(article.headline.main, article.web_url, article.pub_date)} />*/}
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <p>No Results to Display</p>
+              )}
             </PagePanel>
           </Col>
         </Row>
@@ -107,22 +124,7 @@ class MainPage extends Component {
             <PagePanel
               sectionTitle="Saved Articles"
             >
-              {this.state.articles.length ? (
-                <List>
-                  {this.state.articles.map(article => (
-                    <ListItem key={article._id}>
-                      {/*<Link to={"/books/" + article._id}>*/}
-                        {/*<strong>*/}
-                          {/*{article.title} by {article.author}*/}
-                        {/*</strong>*/}
-                      {/*</Link>*/}
-                      <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <h3>No Results to Display</h3>
-              )}
+
             </PagePanel>
           </Col>
         </Row>
