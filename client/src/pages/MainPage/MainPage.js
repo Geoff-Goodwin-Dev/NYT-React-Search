@@ -45,11 +45,9 @@ class MainPage extends Component {
     if (this.state.topic) {
       API.runQuery(this.state.topic, this.state.startYear, this.state.endYear)
         .then(res => {
-          console.log(res.data.response.docs);
           this.setState({ articles: res.data.response.docs })
         });
       this.setState({ topic: "", startYear: "", endYear: "" });
-      console.log("form submitted");
     }
   };
 
@@ -105,8 +103,8 @@ class MainPage extends Component {
                           {article.headline.main}
                         </a>
                       </strong>
-                      <p>
-                        Published: {article.pub_date}
+                      <p style={{margin:0}}>
+                        Published: {article.pub_date.slice(0, 10)}
                       </p>
                       {/*<SaveBtn onClick={() => this.handleSaveBtn(article.headline.main, article.web_url, article.pub_date)} />*/}
                     </ListItem>
